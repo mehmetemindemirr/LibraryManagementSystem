@@ -47,6 +47,38 @@ class VeritabaniYoneticisi:
     def baglantiyi_kapat(self):
         self.conn.close()
 
+# --- Ana Program Döngüsü ---
+def main():
+    db = VeritabaniYoneticisi()
+    while True:
+        print("\n1. Kitap Ekle")
+        print("2. Kitapları Listele")
+        print("3. Çıkış")
+        secim = input("Seçiminiz (1/2/3): ")
+
+        if secim == "1":
+            isim = input("Kitap İsmi: ")
+            yazar = input("Yazar: ")
+            try:
+                sayfa = int(input("Sayfa Sayısı: "))
+                db.kitap_ekle(isim, yazar, sayfa)
+            except ValueError:
+                print("Hata: Sayfa sayısı rakam olmalıdır!")
+
+        elif secim == "2":
+            db.kitaplari_listele()
+
+        elif secim == "3":
+            db.baglantiyi_kapat()
+            print("Görüşmek üzere! 👋")
+            break
+        else:
+            print("Geçersiz seçim.")
+
+
+if __name__ == "__main__":
+    main()
+
 
 
 
